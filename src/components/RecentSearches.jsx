@@ -10,7 +10,9 @@ const RecentSearches = () => {
     const currentSearchesJSON = localStorage.getItem("searches");
     const currentSearches = JSON.parse(currentSearchesJSON);
 
-    setSearches(currentSearches.sort((a, b) => b.cnt - a.cnt));
+    if (currentSearches) {
+      setSearches(currentSearches.sort((a, b) => b.cnt - a.cnt));
+    }
   }, []);
 
   if (searches.length === 0) {
