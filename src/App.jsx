@@ -5,6 +5,7 @@ import {
   Typography,
   MenuItem,
   Grid,
+  Button,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { MODELS_AND_MAKES } from "./assets/makes-and-models";
@@ -12,14 +13,14 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import { useState } from "react";
 import SPSelect from "./components/SPSelect";
 import { arrayRange } from "./utils";
+import SearchIcon from "@mui/icons-material/Search";
 
 const theme = createTheme();
 
 function App() {
   const [make, setMake] = useState("Audi");
   const [model, setModel] = useState("Any");
-  const [minYear, setMinYear] = useState(2022);
-  const [maxYear, setMaxYear] = useState(2023);
+  const [year, setYear] = useState(2022);
 
   const handleMakeChange = (event) => {
     setModel("Any");
@@ -30,12 +31,14 @@ function App() {
     setModel(event.target.value);
   };
 
-  const handleMinYearChange = (event) => {
-    setMinYear(event.target.value);
+  const handleYearChange = (event) => {
+    setYear(event.target.value);
   };
 
-  const handleMaxYearChange = (event) => {
-    setMaxYear(event.target.value);
+  const handleSearch = () => {
+    const CAR_PART_PRO_URL = `https://pro-oh.car-part.com/cgi-bin/proSearch.cgi?userPart=Headlight+Assembly&filterOrder2=ASC&limitVin=n&userDate2=Ending+Year&userDate=${year}&filterOrder1=ASC&filterPrice=all&filterAge=&userSearch=int&filterCert=all&filterDelivery=3&userPage=1&userModel=${make}+${model}&userLocation=All+States&filterDamageUnit=&userVIN=&filterPartType=List-2%2C3%2CA%2CQ%2CR&limitVins=n&userZip=L4C0S7&limitGradeA=n&filterSort1=grade&userPreference=grade&userInterchange=None&filterWarranty=all&filterSort2=zip&svZip=y&filterAGrade=n&limitYears=n&limitMiles=n&buyerType=S&request_method=POST`;
+
+    window.open(CAR_PART_PRO_URL, "_blank", "noreferrer");
   };
 
   return (
@@ -80,30 +83,24 @@ function App() {
           </SPSelect>
         </Grid>
         <Grid item xs={1}>
-          <SPSelect
-            name="Min Year"
-            value={minYear}
-            onChange={handleMinYearChange}
-          >
-            {arrayRange(2000, maxYear, 1).map((y) => (
+          <SPSelect name="Year" value={year} onChange={handleYearChange}>
+            {arrayRange(2000, 2023, 1).map((y) => (
               <MenuItem key={`${y}-min-element`} value={y}>
                 {y}
               </MenuItem>
             ))}
           </SPSelect>
         </Grid>
-        <Grid item xs={1}>
-          <SPSelect
-            name="Max Year"
-            value={maxYear}
-            onChange={handleMaxYearChange}
+
+        <Grid item xs={12} sx={{ textAlign: "center" }}>
+          <Button
+            variant="contained"
+            size="large"
+            startIcon={<SearchIcon />}
+            onClick={handleSearch}
           >
-            {arrayRange(minYear, 2023, 1).map((y) => (
-              <MenuItem key={`${y}-max-element`} value={y}>
-                {y}
-              </MenuItem>
-            ))}
-          </SPSelect>
+            Search
+          </Button>
         </Grid>
       </Grid>
     </ThemeProvider>
