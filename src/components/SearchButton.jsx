@@ -2,7 +2,7 @@ import { Grid, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { areObjectsEqual, navigateToCarPartsPro } from "../utils";
 
-const SearchButton = ({ make, model, year }) => {
+const SearchButton = ({ make, model, year, onPress }) => {
   const saveSearch = () => {
     let updatedSearches = [{ make, model, year, cnt: 1 }];
     const previousSearchesJSON = localStorage.getItem("searches");
@@ -40,7 +40,10 @@ const SearchButton = ({ make, model, year }) => {
   const handleSearch = () => {
     navigateToCarPartsPro(make, model, year);
     saveSearch();
-    window.location.reload(false);
+
+    if (onPress) {
+      onPress();
+    }
   };
 
   return (

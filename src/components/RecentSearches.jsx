@@ -3,7 +3,7 @@ import { Typography, Grid, Chip } from "@mui/material";
 import { useEffect, useState } from "react";
 import { navigateToCarPartsPro } from "../utils";
 
-const RecentSearches = () => {
+const RecentSearches = ({ refresh }) => {
   const [searches, setSearches] = useState([]);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const RecentSearches = () => {
     if (currentSearches) {
       setSearches(currentSearches.sort((a, b) => b.cnt - a.cnt));
     }
-  }, []);
+  }, [refresh]);
 
   if (searches.length === 0) {
     return null;

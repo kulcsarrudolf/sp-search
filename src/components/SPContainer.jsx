@@ -14,6 +14,7 @@ const DEFAULT_FILTER = {
 
 const SPContainer = () => {
   const [filter, setFilter] = useState(null);
+  const [refresh, setRefresh] = useState(1);
 
   useEffect(() => {
     const lastFilterJSON = localStorage.getItem("lastSearch");
@@ -41,8 +42,11 @@ const SPContainer = () => {
         make={filter.make}
         model={filter.model}
         year={filter.year}
+        onPress={() => {
+          setRefresh((prev) => prev + 1);
+        }}
       />
-      <RecentSearches />
+      <RecentSearches refresh={refresh} />
     </Grid>
   );
 };
