@@ -1452,5 +1452,4 @@ export const MODELS_AND_MAKES = [
   { make: "Wartburg", models: [] },
   { make: "Westfield", models: [] },
   { make: "Wiesmann", models: [] },
-  { make: "Other", models: [] },
-];
+].sort((a, b) => a.make.localeCompare(b.make));
