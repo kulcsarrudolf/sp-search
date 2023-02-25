@@ -37,7 +37,7 @@ const RecentSearches = () => {
               navigateToCarPartsPro(s.make, s.model, s.year);
             }}
             deleteIcon={<KeyboardDoubleArrowRightIcon />}
-            sx={{ mx: 1 }}
+            sx={{ mx: 0.25, mb: 1 }}
           />
         ))}
       </Grid>

@@ -1,47 +1,45 @@
 import { Grid, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { navigateToCarPartsPro } from "../utils";
+import { areObjectsEqual, navigateToCarPartsPro } from "../utils";
 
 const SearchButton = ({ make, model, year }) => {
-  const saveSearch = (make, model, year) => {
-    const currentSearchesJSON = localStorage.getItem("searches");
+  const saveSearch = () => {
+    let updatedSearches = [{ make, model, year, cnt: 1 }];
+    const previousSearchesJSON = localStorage.getItem("searches");
+    const previousSearches = JSON.parse(previousSearchesJSON) ?? [];
+    const currentSearch = { make, model, year };
 
-    if (currentSearchesJSON) {
-      const currentSearches = JSON.parse(currentSearchesJSON);
+    const existingSearch = previousSearches.find((s) =>
+      areObjectsEqual(
+        { make: s.make, model: s.model, year: s.year },
+        currentSearch
+      )
+    );
 
-      const existingSearch = currentSearches.find(
-        (s) => s.make === make && s.model === model && s.year === year
+    if (existingSearch) {
+      const filteredSearches = previousSearches.filter(
+        (s) =>
+          !areObjectsEqual(
+            { make: s.make, model: s.model, year: s.year },
+            currentSearch
+          )
       );
 
-      if (existingSearch) {
-        const filteredSearches = currentSearches.filter(
-          (s) => s.make !== make && s.model !== model && s.year !== year
-        );
-
-        localStorage.setItem(
-          "searches",
-          JSON.stringify([
-            { make, model, year, cnt: existingSearch.cnt + 1 },
-            ...filteredSearches,
-          ])
-        );
-      } else {
-        localStorage.setItem(
-          "searches",
-          JSON.stringify([{ make, model, year, cnt: 1 }, ...currentSearches])
-        );
-      }
+      updatedSearches = [
+        { ...currentSearch, cnt: existingSearch.cnt + 1 },
+        ...filteredSearches,
+      ];
     } else {
-      localStorage.setItem(
-        "searches",
-        JSON.stringify([{ make, model, year, cnt: 1 }])
-      );
+      updatedSearches = [{ ...currentSearch, cnt: 1 }, ...previousSearches];
     }
+
+    localStorage.setItem("searches", JSON.stringify(updatedSearches));
   };
 
   const handleSearch = () => {
     navigateToCarPartsPro(make, model, year);
-    saveSearch(make, model, year);
+    saveSearch();
+    window.location.reload(false);
   };
 
   return (

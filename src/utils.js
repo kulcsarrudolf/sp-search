@@ -9,3 +9,21 @@ export const navigateToCarPartsPro = (make, model, year) => {
 
   window.open(CAR_PART_PRO_URL, "_blank", "noreferrer");
 };
+
+export function areObjectsEqual(obj1, obj2) {
+  if (obj1 === obj2) {
+    return true;
+  }
+
+  if (!obj1 || !obj2 || Object.keys(obj1).length !== Object.keys(obj2).length) {
+    return false;
+  }
+
+  for (let key in obj1) {
+    if (!(key in obj2) || obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
