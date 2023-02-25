@@ -34,6 +34,7 @@ const SearchButton = ({ make, model, year }) => {
     }
 
     localStorage.setItem("searches", JSON.stringify(updatedSearches));
+    localStorage.setItem("lastSearch", JSON.stringify(currentSearch));
   };
 
   const handleSearch = () => {
