@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Searches from "./Searches";
 
-const RecentSearches = ({ refresh }) => {
+const PopularSearches = ({ refresh }) => {
   const [searches, setSearches] = useState([]);
 
   useEffect(() => {
@@ -9,15 +9,11 @@ const RecentSearches = ({ refresh }) => {
     const currentSearches = JSON.parse(currentSearchesJSON);
 
     if (currentSearches) {
-      setSearches(currentSearches.slice(0, 10));
+      setSearches(currentSearches.sort((a, b) => b.cnt - a.cnt).slice(0, 10));
     }
   }, [refresh]);
 
-  if (searches.length === 0) {
-    return null;
-  }
-
-  return <Searches title="Recent Searches" searches={searches} />;
+  return <Searches title="Popular Searches" searches={searches} />;
 };
 
-export default RecentSearches;
+export default PopularSearches;

@@ -5,6 +5,7 @@ import { Grid } from "@mui/material";
 import RecentSearches from "./RecentSearches";
 import SearchButton from "./SearchButton";
 import SPFilter from "./SPFilter";
+import PopularSearches from "./PopularSearches";
 
 const DEFAULT_FILTER = {
   make: "Audi",
@@ -47,6 +48,7 @@ const SPContainer = () => {
         }}
       />
       <RecentSearches refresh={refresh} />
+      <PopularSearches refresh={refresh} />
     </Grid>
   );
 };
