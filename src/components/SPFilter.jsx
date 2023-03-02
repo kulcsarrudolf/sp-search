@@ -2,9 +2,11 @@ import { MenuItem, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { MODELS_AND_MAKES } from "../assets/makes-and-models";
 import { arrayRange } from "../utils";
+import { DEFAULT_MAKES } from "./SettingsPopUp";
 import SPSelect from "./SPSelect";
 
 const SPFilter = ({ filter, setFilter }) => {
+  const [defaultMakes, setDefaultMakes] = useState([]);
   const [make, setMake] = useState(filter.make);
   const [model, setModel] = useState(filter.model);
   const [year, setYear] = useState(filter.year);
@@ -23,6 +25,14 @@ const SPFilter = ({ filter, setFilter }) => {
   };
 
   useEffect(() => {
+    const savedDefaultMakesJSON = localStorage.getItem("defaultMakes");
+    const savedDefaultMakes =
+      JSON.parse(savedDefaultMakesJSON) ?? DEFAULT_MAKES;
+
+    setDefaultMakes(savedDefaultMakes);
+  }, []);
+
+  useEffect(() => {
     setFilter({ make, model, year });
   }, [make, model, year]);
 
@@ -30,9 +40,9 @@ const SPFilter = ({ filter, setFilter }) => {
     <>
       <Grid item xs={2}>
         <SPSelect name="Make" value={make} onChange={handleMakeChange}>
-          {MODELS_AND_MAKES.map((c) => (
-            <MenuItem key={`${c.make}-element`} value={c.make}>
-              {c.make}
+          {defaultMakes.map((make) => (
+            <MenuItem key={`${make}-element`} value={make}>
+              {make}
             </MenuItem>
           ))}
         </SPSelect>
