@@ -12,14 +12,7 @@ import {
 
 import { MODELS_AND_MAKES } from "../assets/makes-and-models";
 import SpDialog from "../shared-components/SpDialog";
-
-export const DEFAULT_MAKES = [
-  "Audi",
-  "Volkswagen",
-  "BMW",
-  "Mercedes-Benz",
-  "Tesla",
-];
+import { DEFAULT_MAKES } from "../assets/default-values";
 
 const SettingsPopUp = ({ open, onClose }) => {
   const [checkedMakes, setCheckedMakes] = useState(null);

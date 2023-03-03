@@ -2,16 +2,13 @@ import { useEffect, useState } from "react";
 
 import { Grid } from "@mui/material";
 
-import RecentSearches from "./RecentSearches";
-import SearchButton from "./SearchButton";
 import SPFilter from "./SPFilter";
+import SearchButton from "./SearchButton";
+
+import RecentSearches from "./RecentSearches";
 import PopularSearches from "./PopularSearches";
 
-const DEFAULT_FILTER = {
-  make: "Audi",
-  model: "Any",
-  year: 2022,
-};
+import { DEFAULT_FILTER } from "../assets/default-values";
 
 const SPContainer = () => {
   const [filter, setFilter] = useState(null);

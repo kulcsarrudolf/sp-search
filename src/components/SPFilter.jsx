@@ -1,8 +1,8 @@
 import { MenuItem, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
+import { DEFAULT_MAKES } from "../assets/default-values";
 import { MODELS_AND_MAKES } from "../assets/makes-and-models";
 import { arrayRange } from "../utils";
-import { DEFAULT_MAKES } from "./SettingsPopUp";
 import SPSelect from "./SPSelect";
 
 const SPFilter = ({ filter, setFilter }) => {
