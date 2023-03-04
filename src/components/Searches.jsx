@@ -17,7 +17,7 @@ const Searches = ({ title, searches }) => {
           <Chip
             key={`${s.make}-${s.year}-${idx}-search-chip`}
             color="primary"
-            label={`${s.make} ${s.model} (${s.year})`}
+            label={`${s.make} ${s.model} (${s.year}) [${s.part}]`}
             onClick={() => {
               navigateToCarPartsPro(s.make, s.model, s.year, s.part);
             }}
