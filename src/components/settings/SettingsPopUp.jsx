@@ -12,6 +12,7 @@ const SettingsPopUp = ({ open, onClose }) => {
     if (checkedMakes) {
       localStorage.setItem("defaultMakes", JSON.stringify(checkedMakes));
     }
+    window.location.reload(false);
     onClose();
   };
 
