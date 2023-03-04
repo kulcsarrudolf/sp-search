@@ -72,10 +72,10 @@ const DefaultMakes = ({ checkedMakes, setCheckedMakes }) => {
                     onClick={() => {
                       setCheckedMakes((prev) => {
                         if (prev.includes(c.make)) {
-                          return prev.filter((m) => m !== c.make);
+                          return prev.filter((m) => m !== c.make).sort();
                         }
 
-                        return [c.make, ...prev];
+                        return [c.make, ...prev].sort();
                       });
                     }}
                     dense
