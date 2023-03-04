@@ -2,8 +2,7 @@ import { useState } from "react";
 import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import SettingsIcon from "@mui/icons-material/Settings";
-
-import SettingsPopUp from "./SettingsPopUp";
+import SettingsPopUp from "./settings/SettingsPopUp";
 
 const SPAppBar = () => {
   const [settingsPopUp, setSettingsPopUp] = useState(false);
