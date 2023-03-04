@@ -40,6 +40,7 @@ const SPContainer = () => {
         make={filter.make}
         model={filter.model}
         year={filter.year}
+        part={filter.part}
         onPress={() => {
           setRefresh((prev) => prev + 1);
         }}

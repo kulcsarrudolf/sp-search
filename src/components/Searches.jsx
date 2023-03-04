@@ -19,10 +19,10 @@ const Searches = ({ title, searches }) => {
             color="primary"
             label={`${s.make} ${s.model} (${s.year})`}
             onClick={() => {
-              navigateToCarPartsPro(s.make, s.model, s.year);
+              navigateToCarPartsPro(s.make, s.model, s.year, s.part);
             }}
             onDelete={() => {
-              navigateToCarPartsPro(s.make, s.model, s.year);
+              navigateToCarPartsPro(s.make, s.model, s.year, s.part);
             }}
             deleteIcon={<KeyboardDoubleArrowRightIcon />}
             sx={{ mx: 0.25, mb: 1 }}

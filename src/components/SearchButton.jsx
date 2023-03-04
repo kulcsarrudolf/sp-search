@@ -2,7 +2,7 @@ import { Grid, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { areObjectsEqual, navigateToCarPartsPro } from "../utils";
 
-const SearchButton = ({ make, model, year, onPress }) => {
+const SearchButton = ({ make, model, year, part, onPress }) => {
   const saveSearch = () => {
     let updatedSearches = [{ make, model, year, cnt: 1 }];
     const previousSearchesJSON = localStorage.getItem("searches");
@@ -11,7 +11,7 @@ const SearchButton = ({ make, model, year, onPress }) => {
 
     const existingSearch = previousSearches.find((s) =>
       areObjectsEqual(
-        { make: s.make, model: s.model, year: s.year },
+        { make: s.make, model: s.model, year: s.year, part: s.part },
         currentSearch
       )
     );
@@ -20,7 +20,7 @@ const SearchButton = ({ make, model, year, onPress }) => {
       const filteredSearches = previousSearches.filter(
         (s) =>
           !areObjectsEqual(
-            { make: s.make, model: s.model, year: s.year },
+            { make: s.make, model: s.model, year: s.year, part: s.part },
             currentSearch
           )
       );
@@ -38,7 +38,7 @@ const SearchButton = ({ make, model, year, onPress }) => {
   };
 
   const handleSearch = () => {
-    navigateToCarPartsPro(make, model, year);
+    navigateToCarPartsPro(make, model, year, part);
     saveSearch();
 
     if (onPress) {

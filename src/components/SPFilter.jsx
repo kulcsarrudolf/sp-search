@@ -1,6 +1,6 @@
 import { MenuItem, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
-import { DEFAULT_MAKES } from "../assets/default-values";
+import { DEFAULT_MAKES, DEFAULT_PARTS } from "../assets/default-values";
 import { MODELS_AND_MAKES } from "../assets/makes-and-models";
 import { arrayRange } from "../utils";
 import SPSelect from "./SPSelect";
@@ -10,6 +10,7 @@ const SPFilter = ({ filter, setFilter }) => {
   const [make, setMake] = useState(filter.make);
   const [model, setModel] = useState(filter.model);
   const [year, setYear] = useState(filter.year);
+  const [part, setPart] = useState(DEFAULT_PARTS[0]);
 
   const handleMakeChange = (event) => {
     setModel("Any");
@@ -24,6 +25,10 @@ const SPFilter = ({ filter, setFilter }) => {
     setYear(event.target.value);
   };
 
+  const handlePartChange = (event) => {
+    setPart(event.target.value);
+  };
+
   useEffect(() => {
     const savedDefaultMakesJSON = localStorage.getItem("defaultMakes");
     const savedDefaultMakes =
@@ -33,8 +38,8 @@ const SPFilter = ({ filter, setFilter }) => {
   }, []);
 
   useEffect(() => {
-    setFilter({ make, model, year });
-  }, [make, model, year]);
+    setFilter({ make, model, year, part });
+  }, [make, model, year, part]);
 
   return (
     <>
@@ -62,6 +67,15 @@ const SPFilter = ({ filter, setFilter }) => {
           {arrayRange(2000, 2023, 1).map((y) => (
             <MenuItem key={`${y}-min-element`} value={y}>
               {y}
+            </MenuItem>
+          ))}
+        </SPSelect>
+      </Grid>
+      <Grid item xs={2}>
+        <SPSelect name="Part" value={part} onChange={handlePartChange}>
+          {DEFAULT_PARTS.map((part) => (
+            <MenuItem key={`${part}-part-element`} value={part}>
+              {part}
             </MenuItem>
           ))}
         </SPSelect>
