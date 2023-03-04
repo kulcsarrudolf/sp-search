@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 
 import SPFilter from "./SPFilter";
-import SearchButton from "./SearchButton";
+import SearchButton from "./searches/SearchButton";
 
-import RecentSearches from "./RecentSearches";
-import PopularSearches from "./PopularSearches";
+import RecentSearches from "./searches/RecentSearches";
+import PopularSearches from "./searches/PopularSearches";
 
 import { DEFAULT_FILTER } from "../assets/default-values";
 

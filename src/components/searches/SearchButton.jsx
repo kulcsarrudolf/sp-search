@@ -1,6 +1,6 @@
 import { Grid, Button } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { areObjectsEqual, navigateToCarPartsPro } from "../utils";
+import { areObjectsEqual, navigateToCarPartsPro } from "../../utils";
 
 const SearchButton = ({ make, model, year, part, onPress }) => {
   const saveSearch = () => {

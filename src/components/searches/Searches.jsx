@@ -1,6 +1,6 @@
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import { Typography, Grid, Chip } from "@mui/material";
-import { navigateToCarPartsPro } from "../utils";
+import { navigateToCarPartsPro } from "../../utils";
 
 const Searches = ({ title, searches }) => {
   if (searches.length === 0) {
