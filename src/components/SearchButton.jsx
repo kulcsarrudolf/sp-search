@@ -7,7 +7,7 @@ const SearchButton = ({ make, model, year, part, onPress }) => {
     let updatedSearches = [{ make, model, year, cnt: 1 }];
     const previousSearchesJSON = localStorage.getItem("searches");
     const previousSearches = JSON.parse(previousSearchesJSON) ?? [];
-    const currentSearch = { make, model, year };
+    const currentSearch = { make, model, year, part };
 
     const existingSearch = previousSearches.find((s) =>
       areObjectsEqual(

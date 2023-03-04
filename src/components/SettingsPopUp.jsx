@@ -8,11 +8,14 @@ import {
   ListItemText,
   Checkbox,
   Typography,
+  Button,
+  Box,
+  Alert,
 } from "@mui/material";
 
 import { MODELS_AND_MAKES } from "../assets/makes-and-models";
 import SpDialog from "../shared-components/SpDialog";
-import { DEFAULT_MAKES } from "../assets/default-values";
+import { DEFAULT_FILTER, DEFAULT_MAKES } from "../assets/default-values";
 
 const SettingsPopUp = ({ open, onClose }) => {
   const [checkedMakes, setCheckedMakes] = useState(null);
@@ -42,11 +45,37 @@ const SettingsPopUp = ({ open, onClose }) => {
       onSave={handleSaveSettings}
       onClose={onClose}
     >
+      <ResetAll onClose={onClose} />
       <DefaultMakes
         checkedMakes={checkedMakes}
         setCheckedMakes={setCheckedMakes}
       />
     </SpDialog>
+  );
+};
+
+const ResetAll = ({ onClose }) => {
+  const handleResetAll = () => {
+    localStorage.setItem("defaultMakes", JSON.stringify(DEFAULT_MAKES));
+    localStorage.setItem("lastSearch", JSON.stringify(DEFAULT_FILTER));
+    localStorage.setItem("searches", JSON.stringify([]));
+    onClose();
+    window.location.reload(false);
+  };
+
+  return (
+    <Box sx={{ mb: 2 }}>
+      <Typography variant="h6" sx={{ fontWeight: "bold" }} gutterBottom>
+        Reset All
+      </Typography>
+      <Alert severity="warning" sx={{ my: 2 }}>
+        All your saved data (Search History, Last Search, Selected Makes) will
+        be cleared.
+      </Alert>
+      <Button variant="contained" onClick={handleResetAll}>
+        Reset Now
+      </Button>
+    </Box>
   );
 };
 
