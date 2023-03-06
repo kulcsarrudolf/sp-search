@@ -43,7 +43,7 @@ const SPFilter = ({ filter, setFilter }) => {
 
   return (
     <>
-      <Grid item xs={2}>
+      <Grid item xs={12} sm={6} md={3}>
         <SPSelect name="Make" value={make} onChange={handleMakeChange}>
           {defaultMakes.map((make) => (
             <MenuItem key={`${make}-element`} value={make}>
@@ -52,7 +52,7 @@ const SPFilter = ({ filter, setFilter }) => {
           ))}
         </SPSelect>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={12} sm={6} md={3}>
         <SPSelect name="Model" value={model} onChange={handleModelChange}>
           <MenuItem value={"Any"}>Any</MenuItem>
           {MODELS_AND_MAKES.find((c) => c.make === make).models.map((model) => (
@@ -62,7 +62,7 @@ const SPFilter = ({ filter, setFilter }) => {
           ))}
         </SPSelect>
       </Grid>
-      <Grid item xs={1}>
+      <Grid item xs={12} sm={6} md={1.5}>
         <SPSelect name="Year" value={year} onChange={handleYearChange}>
           {arrayRange(2000, 2023, 1).map((y) => (
             <MenuItem key={`${y}-min-element`} value={y}>
@@ -71,7 +71,7 @@ const SPFilter = ({ filter, setFilter }) => {
           ))}
         </SPSelect>
       </Grid>
-      <Grid item xs={2}>
+      <Grid item xs={12} sm={6} md={3}>
         <SPSelect name="Part" value={part} onChange={handlePartChange}>
           {DEFAULT_PARTS.map((part) => (
             <MenuItem key={`${part}-part-element`} value={part}>
