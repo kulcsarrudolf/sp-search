@@ -1,5 +1,5 @@
 import { Typography, Button, Box } from "@mui/material";
-import SaveIcon from "@mui/icons-material/Save";
+import FileDownloadIcon from "@mui/icons-material/FileDownload";
 import { saveAs } from "file-saver";
 
 const ImportAndExport = () => {
@@ -18,7 +18,7 @@ const ImportAndExport = () => {
       <Button
         variant="contained"
         onClick={handleExport}
-        startIcon={<SaveIcon />}
+        startIcon={<FileDownloadIcon />}
       >
         Export
       </Button>

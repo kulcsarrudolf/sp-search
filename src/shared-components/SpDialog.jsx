@@ -8,6 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import SaveIcon from "@mui/icons-material/Save";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -59,7 +60,12 @@ export default function SpDialog({ title, open, onClose, onSave, children }) {
       </BootstrapDialogTitle>
       <DialogContent dividers>{children}</DialogContent>
       <DialogActions>
-        <Button autoFocus variant="contained" onClick={onSave}>
+        <Button
+          autoFocus
+          variant="contained"
+          onClick={onSave}
+          startIcon={<SaveIcon />}
+        >
           Save changes
         </Button>
       </DialogActions>
