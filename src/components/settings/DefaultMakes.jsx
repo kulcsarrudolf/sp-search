@@ -26,7 +26,7 @@ const DefaultMakes = ({ checkedMakes, setCheckedMakes }) => {
           {MODELS_AND_MAKES.map((c) => {
             const labelId = `checkbox-list-label-${c.make}`;
             return (
-              <Grid item xs={6} key={`${c.make}-item-key`}>
+              <Grid item xs={12} sm={6} key={`${c.make}-item-key`}>
                 <ListItem key={c.make} disablePadding>
                   <ListItemButton
                     role={undefined}
@@ -41,7 +41,7 @@ const DefaultMakes = ({ checkedMakes, setCheckedMakes }) => {
                     }}
                     dense
                   >
-                    <ListItemIcon>
+                    <ListItemIcon sx={{ minWidth: 0 }}>
                       <Checkbox
                         edge="start"
                         checked={checkedMakes.includes(c.make)}
