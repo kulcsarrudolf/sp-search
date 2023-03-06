@@ -4,6 +4,7 @@ import SpDialog from "../../shared-components/SpDialog";
 import { DEFAULT_MAKES } from "../../assets/default-values";
 import DefaultMakes from "./DefaultMakes";
 import ResetAll from "./ResetAll";
+import ImportAndExport from "./ImportAndExport";
 
 const SettingsPopUp = ({ open, onClose }) => {
   const [checkedMakes, setCheckedMakes] = useState(null);
@@ -35,6 +36,7 @@ const SettingsPopUp = ({ open, onClose }) => {
       onClose={onClose}
     >
       <ResetAll onClose={onClose} />
+      <ImportAndExport />
       <DefaultMakes
         checkedMakes={checkedMakes}
         setCheckedMakes={setCheckedMakes}
