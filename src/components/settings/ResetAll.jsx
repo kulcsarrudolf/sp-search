@@ -1,6 +1,7 @@
 import { Typography, Button, Box, Alert } from "@mui/material";
 
 import { DEFAULT_FILTER, DEFAULT_MAKES } from "../../assets/default-values";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 const ResetAll = ({ onClose }) => {
   const handleResetAll = () => {
@@ -20,7 +21,11 @@ const ResetAll = ({ onClose }) => {
         All your saved data (Search History, Last Search, Selected Makes) will
         be cleared.
       </Alert>
-      <Button variant="contained" onClick={handleResetAll}>
+      <Button
+        variant="contained"
+        onClick={handleResetAll}
+        startIcon={<RestartAltIcon />}
+      >
         Reset Now
       </Button>
     </Box>
