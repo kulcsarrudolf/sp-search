@@ -1,4 +1,4 @@
-import { MenuItem, Grid } from "@mui/material";
+import { MenuItem, Grid, Typography, Divider } from "@mui/material";
 import { useEffect, useState } from "react";
 import { DEFAULT_MAKES, DEFAULT_PARTS } from "../assets/default-values";
 import { MODELS_AND_MAKES } from "../assets/makes-and-models";
@@ -11,10 +11,22 @@ const SPFilter = ({ filter, setFilter }) => {
   const [model, setModel] = useState(filter.model);
   const [year, setYear] = useState(filter.year);
   const [part, setPart] = useState(DEFAULT_PARTS[0]);
+  const [topSearchedModels, setTopSearchedModels] = useState([]);
 
+  const updateTopSearchedModels = (currentSelectedMake) => {
+    const currentSearchesJSON = localStorage.getItem("searches");
+    const currentSearches = JSON.parse(currentSearchesJSON);
+    setTopSearchedModels(
+      currentSearches
+        .filter((s) => s.make === currentSelectedMake)
+        .map((s) => s.model)
+    );
+  };
   const handleMakeChange = (event) => {
+    const currentSelectedMake = event.target.value;
     setModel("Any");
-    setMake(event.target.value);
+    setMake(currentSelectedMake);
+    updateTopSearchedModels(currentSelectedMake);
   };
 
   const handleModelChange = (event) => {
@@ -35,6 +47,7 @@ const SPFilter = ({ filter, setFilter }) => {
       JSON.parse(savedDefaultMakesJSON) ?? DEFAULT_MAKES;
 
     setDefaultMakes(savedDefaultMakes);
+    updateTopSearchedModels(make);
   }, []);
 
   useEffect(() => {
@@ -55,6 +68,8 @@ const SPFilter = ({ filter, setFilter }) => {
       <Grid item xs={12} sm={6} md={3}>
         <SPSelect name="Model" value={model} onChange={handleModelChange}>
           <MenuItem value={"Any"}>Any</MenuItem>
+          <TopSearchedModels topSearchedModels={topSearchedModels} />
+          <Divider />
           {MODELS_AND_MAKES.find((c) => c.make === make).models.map((model) => (
             <MenuItem key={`${model}-model-element`} value={model}>
               {model}
@@ -84,4 +99,21 @@ const SPFilter = ({ filter, setFilter }) => {
   );
 };
 
+const TopSearchedModels = ({ topSearchedModels }) => (
+  <>
+    {topSearchedModels.length > 0 && (
+      <>
+        <Divider />
+        <Typography variant="caption" display="block" sx={{ my: 1, mx: 2 }}>
+          Top Searched Models
+        </Typography>
+        {topSearchedModels.map((model) => (
+          <MenuItem key={`${model}-model-element`} value={model}>
+            {model}
+          </MenuItem>
+        ))}
+      </>
+    )}
+  </>
+);
 export default SPFilter;
