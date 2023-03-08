@@ -19,7 +19,9 @@ const SPFilter = ({ filter, setFilter }) => {
     setTopSearchedModels(
       currentSearches
         .filter((s) => s.make === currentSelectedMake)
+        .sort((a, b) => b.cnt - a.cnt)
         .map((s) => s.model)
+        .slice(0, 5)
     );
   };
   const handleMakeChange = (event) => {
