@@ -24,6 +24,7 @@ const SPFilter = ({ filter, setFilter }) => {
         .slice(0, 5)
     );
   };
+
   const handleMakeChange = (event) => {
     const currentSelectedMake = event.target.value;
     setModel("Any");
@@ -42,7 +43,6 @@ const SPFilter = ({ filter, setFilter }) => {
   const handlePartChange = (event) => {
     setPart(event.target.value);
   };
-
   useEffect(() => {
     const savedDefaultMakesJSON = localStorage.getItem("defaultMakes");
     const savedDefaultMakes =
@@ -70,8 +70,19 @@ const SPFilter = ({ filter, setFilter }) => {
       <Grid item xs={12} sm={6} md={3}>
         <SPSelect name="Model" value={model} onChange={handleModelChange}>
           <MenuItem value={"Any"}>Any</MenuItem>
-          <TopSearchedModels topSearchedModels={topSearchedModels} />
-          <Divider />
+          {topSearchedModels.length > 0 && <Divider />}
+
+          {topSearchedModels.length > 0 && (
+            <Typography variant="caption" display="block" sx={{ my: 1, mx: 2 }}>
+              Top Searched Models
+            </Typography>
+          )}
+          {topSearchedModels.map((model) => (
+            <MenuItem key={`${model}-model-element`} value={model}>
+              {model}
+            </MenuItem>
+          ))}
+          {topSearchedModels.length > 0 && <Divider />}
           {MODELS_AND_MAKES.find((c) => c.make === make).models.map((model) => (
             <MenuItem key={`${model}-model-element`} value={model}>
               {model}
@@ -101,21 +112,4 @@ const SPFilter = ({ filter, setFilter }) => {
   );
 };
 
-const TopSearchedModels = ({ topSearchedModels }) => (
-  <>
-    {topSearchedModels.length > 0 && (
-      <>
-        <Divider />
-        <Typography variant="caption" display="block" sx={{ my: 1, mx: 2 }}>
-          Top Searched Models
-        </Typography>
-        {topSearchedModels.map((model) => (
-          <MenuItem key={`${model}-model-element`} value={model}>
-            {model}
-          </MenuItem>
-        ))}
-      </>
-    )}
-  </>
-);
 export default SPFilter;
