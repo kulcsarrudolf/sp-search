@@ -1,5 +1,5 @@
 import { createContext, useMemo, useState } from "react";
-import { CssBaseline } from "@mui/material";
+import { CssBaseline, useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SPAppBar from "./components/SpAppBar";
 import SPContainer from "./components/SPContainer";
@@ -9,7 +9,9 @@ export const ColorModeContext = createContext({
 });
 
 function App() {
-  const [mode, setMode] = useState("light");
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  const [mode, setMode] = useState(prefersDarkMode ? "dark" : "light");
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
