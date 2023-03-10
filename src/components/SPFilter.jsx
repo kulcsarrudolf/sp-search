@@ -43,7 +43,6 @@ const SPFilter = ({ filter, setFilter }) => {
   const handlePartChange = (event) => {
     setPart(event.target.value);
   };
-
   useEffect(() => {
     const savedDefaultMakesJSON = localStorage.getItem("defaultMakes");
     const savedDefaultMakes =
