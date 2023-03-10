@@ -1,9 +1,10 @@
-import { MenuItem, Grid, Typography, Divider } from "@mui/material";
+import { MenuItem, Grid, Typography, Divider, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { DEFAULT_MAKES, DEFAULT_PARTS } from "../assets/default-values";
 import { MODELS_AND_MAKES } from "../assets/makes-and-models";
 import SPSelect from "../shared-components/SPSelect";
 import { arrayRange } from "../utils";
+import Autocomplete from "@mui/material/Autocomplete";
 
 const SPFilter = ({ filter, setFilter }) => {
   const [defaultMakes, setDefaultMakes] = useState([]);
@@ -15,7 +16,8 @@ const SPFilter = ({ filter, setFilter }) => {
 
   const updateTopSearchedModels = (currentSelectedMake) => {
     const currentSearchesJSON = localStorage.getItem("searches");
-    const currentSearches = JSON.parse(currentSearchesJSON);
+    const currentSearches = JSON.parse(currentSearchesJSON) ?? [];
+
     setTopSearchedModels(
       currentSearches
         .filter((s) => s.make === currentSelectedMake)
@@ -26,9 +28,9 @@ const SPFilter = ({ filter, setFilter }) => {
   };
 
   const handleMakeChange = (event) => {
-    const currentSelectedMake = event.target.value;
+    const currentSelectedMake = event.target.innerText;
     setModel("Any");
-    setMake(currentSelectedMake);
+    setMake(currentSelectedMake || filter.make);
     updateTopSearchedModels(currentSelectedMake);
   };
 
@@ -59,13 +61,14 @@ const SPFilter = ({ filter, setFilter }) => {
   return (
     <>
       <Grid item xs={12} sm={6} md={3}>
-        <SPSelect name="Make" value={make} onChange={handleMakeChange}>
-          {defaultMakes.map((make) => (
-            <MenuItem key={`${make}-element`} value={make}>
-              {make}
-            </MenuItem>
-          ))}
-        </SPSelect>
+        <Autocomplete
+          value={make}
+          disablePortal
+          options={defaultMakes.map((make) => ({ label: make, value: make }))}
+          fullWidth
+          onChange={handleMakeChange}
+          renderInput={(params) => <TextField {...params} label="Make" />}
+        />
       </Grid>
       <Grid item xs={12} sm={6} md={3}>
         <SPSelect name="Model" value={model} onChange={handleModelChange}>

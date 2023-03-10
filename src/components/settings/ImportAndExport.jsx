@@ -4,7 +4,7 @@ import { saveAs } from "file-saver";
 
 const ImportAndExport = () => {
   const searchHistoryJSON = localStorage.getItem("searches");
-  const hasHistory = searchHistoryJSON.length > 2;
+  const hasHistory = searchHistoryJSON?.length > 2;
 
   const handleExport = () => {
     const blob = new Blob([searchHistoryJSON], {
